@@ -377,3 +377,27 @@ Example:
 action = CONFIRM_CASE
 entity_type = CASE
 entity_id = case-123
+
+## Relationships
+
+| Parent | Child | Relationship | Foreign Key |
+|---|---|---|---|
+| users | owners | One-to-one | owners.user_id |
+| villages | owners | One-to-many | owners.village_id |
+| owners | animals | One-to-many | animals.owner_id |
+| villages | animals | One-to-many | animals.village_id |
+| animals | vaccinations | One-to-many | vaccinations.animal_id |
+| animals | disease_reports | One-to-many | disease_reports.animal_id |
+| users | disease_reports | One-to-many | disease_reports.reported_by |
+| disease_reports | ai_predictions | One-to-many | ai_predictions.report_id |
+| disease_reports | cases | One-to-one/current case | cases.report_id |
+| users | cases | One-to-many as veterinarian | cases.assigned_vet |
+| users | cases | One-to-many as field worker | cases.assigned_worker |
+| cases | field_visits | One-to-many | field_visits.case_id |
+| users | field_visits | One-to-many | field_visits.visited_by |
+| cases | samples | One-to-many | samples.case_id |
+| users | samples | One-to-many | samples.collected_by |
+| users | alerts | One-to-many | alerts.user_id |
+| cases | alerts | One-to-many/optional | alerts.case_id |
+| clusters | alerts | One-to-many/optional | alerts.cluster_id |
+| users | audit_logs | One-to-many | audit_logs.user_id |
